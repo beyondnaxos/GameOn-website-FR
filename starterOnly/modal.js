@@ -40,6 +40,7 @@ const validateEmail = (email) => {
 const isNan = (v) => {
   if (!Number.isInteger(v)) {
     console.log(`${v} is not an integer`);
+
     return false;
   }
 }
@@ -54,7 +55,7 @@ const isChecked = (radio) => {
   return false;
 }
 
-//  test 
+
 
 // check if at least CG is checked
 const checkbox = (i) => {
@@ -74,35 +75,40 @@ const validateForm = (e) => {
   const quantity = document.getElementById("quantity").value;
   const locationRadio = document.querySelectorAll('input[name="location"]');
   const checkbox1 = document.getElementById("checkbox1");
-  // const checkbox2 = document.getElementById("checkbox2");
 
   if (firstname.length < 2) {
     alert("Le prénom doit contenir au moins 2 caractères");
+    document.getElementById("error0").innerHTML="Le prénom doit contenir au moins 2 caractères"
     return false;
   }
 
   else if (lastname.length < 2) {
     alert("Le nom doit contenir au moins 2 caractères");
+    document.getElementById("error1").innerHTML="Le nom doit contenir au moins 2 caractères"
     return false;
   }
 
   else if (!validateEmail(email)) {
     alert("Veuillez entrer une adresse email valide");
+    document.getElementById("error2").innerHTML="Veuillez entrer une adresse email valide"
     return false;
   }
 
-  else if (isNaN(quantity)) {
+  else if (isNaN(quantity ) || quantity === "" ) {
     alert("La quantité doit être un nombre");
+    document.getElementById("error4").innerHTML="La quantité doit être un nombre"
     return false;
   }
 
   else if (isChecked(locationRadio) === false) {
     alert("Veuillez choisir une option");
+    document.getElementById("error5").innerHTML="Veuillez choisir une option"
     return false;
   }
 
   else if (checkbox(checkbox1) === false) {
     alert("Veuillez accepter les conditions générales");
+    document.getElementById("error6").innerHTML="Veuillez accepter les conditions générales"
     return false;
   }
   return true;
@@ -111,9 +117,7 @@ const validateForm = (e) => {
 const validate = (e) => {
   e.preventDefault()
   if (validateForm()) {
-
     alert("Votre formulaire a bien été prise en compte");
-
     console.log(
       "Prénom : " + document.getElementById("first").value +
       "\nNom : " + document.getElementById("last").value +
@@ -123,13 +127,13 @@ const validate = (e) => {
       "\nConditions générales : " + document.getElementById("checkbox1").checked +
       "\nNewletter : " + document.getElementById("checkbox2").checked
     )
-    closeModal();
     return true;
   }
-  console.log("formulaire non validé")
+
   return alert('Formulaire incomplet');
 }
 
-submitButton.addEventListener("click", (e) => validate(e));
+submitButton.addEventListener("click", (e) => validate(e))
+
 
 

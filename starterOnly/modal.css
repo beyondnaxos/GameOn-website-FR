@@ -21,6 +21,11 @@ body {
   margin: 0 auto;
 }
 
+.handle_error {
+  font-size: 12px !important;
+  color: #f00 !important;
+}
+
 p {
   margin-bottom: 0;
   padding: 0.5vw;
@@ -114,6 +119,10 @@ main {
 
 
 }
+.large-container {
+  grid-column: span 12 !important;
+}
+
 
 .modal-btn {
   font-size: 145%;
