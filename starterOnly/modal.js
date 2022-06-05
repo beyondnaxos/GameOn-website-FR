@@ -36,15 +36,6 @@ const validateEmail = (email) => {
   return regexTest.test(String(email).toLowerCase());
 }
 
-// function isNan check if value is integer
-const isNan = (v) => {
-  if (!Number.isInteger(v)) {
-    console.log(`${v} is not an integer`);
-
-    return false;
-  }
-}
-
 // check if at least one is checked
 const isChecked = (radio) => {
   for (let el of radio) {
@@ -55,8 +46,6 @@ const isChecked = (radio) => {
   return false;
 }
 
-
-
 // check if at least CG is checked
 const checkbox = (i) => {
   if (i.checked) {
@@ -66,8 +55,20 @@ const checkbox = (i) => {
   }
 }
 
+// handle error(s)
+const displayMessage = (x, y, err, ok) => {
+  if (x) {
+    y.style.color = "red";
+    y.innerHTML = err;
+    return false
+  } 
+  y.style.color = "green";
+  y.innerHTML = ok;
+  return true 
+}
+
 // validate form 
-const validateForm = (e) => {
+const validateForm = () => {
 
   const firstname = document.getElementById("first").value;
   const lastname = document.getElementById("last").value;
@@ -75,49 +76,32 @@ const validateForm = (e) => {
   const quantity = document.getElementById("quantity").value;
   const locationRadio = document.querySelectorAll('input[name="location"]');
   const checkbox1 = document.getElementById("checkbox1");
+  
+  const isValidFirstName = displayMessage(firstname.length < 2, document.getElementById("error0"), "Le prénom doit contenir au moins 2 caractères" , "Prénom valide");
+  const isValidLastName = displayMessage(lastname.length < 2, document.getElementById("error1"), "Le nom doit contenir au moins 2 caractères", "Nom valide")
+  const isValidEmail = displayMessage(!validateEmail(email), document.getElementById("error2"), "Veuillez entrer une adresse email valide", "Email valide")
+  const isValidQuantity = displayMessage(quantity < 1, document.getElementById("error4"), "Veuillez entrer un nombre supérieur à 0", "Nombre valide")
+  const isValidLocation = displayMessage(!isChecked(locationRadio), document.getElementById("error5"), "Veuillez choisir un lieu", "Lieu valide")
+  const isValidCheckbox1 = displayMessage(!checkbox1.checked, document.getElementById("error6"), "Veuillez accepter les conditions générales", "Conditions générales valides")
 
-  if (firstname.length < 2) {
-    alert("Le prénom doit contenir au moins 2 caractères");
-    document.getElementById("error0").innerHTML="Le prénom doit contenir au moins 2 caractères"
-    return false;
+  if(
+    isValidFirstName &&
+    isValidLastName &&
+    isValidEmail &&
+    isValidQuantity &&
+    isValidLocation &&
+    isValidCheckbox1
+  ){
+    isValid = true
   }
-
-  else if (lastname.length < 2) {
-    alert("Le nom doit contenir au moins 2 caractères");
-    document.getElementById("error1").innerHTML="Le nom doit contenir au moins 2 caractères"
-    return false;
-  }
-
-  else if (!validateEmail(email)) {
-    alert("Veuillez entrer une adresse email valide");
-    document.getElementById("error2").innerHTML="Veuillez entrer une adresse email valide"
-    return false;
-  }
-
-  else if (isNaN(quantity ) || quantity === "" ) {
-    alert("La quantité doit être un nombre");
-    document.getElementById("error4").innerHTML="La quantité doit être un nombre"
-    return false;
-  }
-
-  else if (isChecked(locationRadio) === false) {
-    alert("Veuillez choisir une option");
-    document.getElementById("error5").innerHTML="Veuillez choisir une option"
-    return false;
-  }
-
-  else if (checkbox(checkbox1) === false) {
-    alert("Veuillez accepter les conditions générales");
-    document.getElementById("error6").innerHTML="Veuillez accepter les conditions générales"
-    return false;
-  }
-  return true;
+   return isValid
 }
 
 const validate = (e) => {
   e.preventDefault()
-  if (validateForm()) {
-    alert("Votre formulaire a bien été prise en compte");
+  const isValid = validateForm()
+  if (isValid) {
+
     console.log(
       "Prénom : " + document.getElementById("first").value +
       "\nNom : " + document.getElementById("last").value +
@@ -130,7 +114,7 @@ const validate = (e) => {
     return true;
   }
 
-  return alert('Formulaire incomplet');
+  return console.log("Form non valide");
 }
 
 submitButton.addEventListener("click", (e) => validate(e))
