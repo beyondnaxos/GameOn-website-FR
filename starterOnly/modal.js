@@ -48,7 +48,7 @@ const checkbox = (i) => {
 }
 
 // handle error(s)
-const displayMessage = (x, y, err, ok) => {
+const displayMessage = (x, y, err) => {
   if (x) {
     y.closest('.formData').dataset.error = err
     y.closest('.formData').dataset.errorVisible = true
@@ -63,28 +63,27 @@ const displayMessage = (x, y, err, ok) => {
 const error = document.querySelectorAll(".formData[data-error]::after")
 const errorVisible = document.querySelectorAll(".formData[data-error-visible='true']::after")
 
-// validate form 
-
+// validate form error checker function
 const validateForm = () => {
-  
   const firstname = document.getElementById("first").value
   const lastname = document.getElementById("last").value
   const email = document.getElementById("email").value
   const quantity = document.getElementById("quantity").value
   const locationRadio = document.querySelectorAll('input[name="location"]')
   const checkbox1 = document.getElementById("checkbox1");
-  const isValidFirstName = displayMessage(firstname.trim().length < 2, document.getElementById("first"), "Le prénom doit contenir au moins 2 caractères", "Prénom valide")
-  const isValidLastName = displayMessage(lastname.trim().length < 2, document.getElementById("last"), "Le nom doit contenir au moins 2 caractères", "Nom valide")
-  const isValidEmail = displayMessage(!validateEmail(email), document.getElementById("email"), "Veuillez entrer une adresse email valide", "Email valide")
-  const isValidBirthDate = displayMessage(!document.getElementById("birthdate").value, document.getElementById("birthdate"), "Veuillez entrer une date de naissance valide", "Date de naissance valide")
+  const isValidFirstName = displayMessage(firstname.trim().length < 2, document.getElementById("first"), "Le prénom doit contenir au moins 2 caractères" )
+  const isValidLastName = displayMessage(lastname.trim().length < 2, document.getElementById("last"), "Le nom doit contenir au moins 2 caractères")
+  const isValidEmail = displayMessage(!validateEmail(email), document.getElementById("email"), "Veuillez entrer une adresse email valide")
+  const isValidBirthDate = displayMessage(!document.getElementById("birthdate").value, document.getElementById("birthdate"), "Veuillez entrer une date de naissance valide")
   const isValidQuantity = displayMessage(quantity < 1, document.getElementById("quantity"), "Veuillez entrer un nombre supérieur à 0", "Nombre valide")
   const isValidLocation = displayMessage(!isChecked(locationRadio), document.querySelector("input[name='location']"), "Veuillez choisir un lieu", "Lieu valide")
-  const isValidCheckbox1 = displayMessage(!checkbox1.checked, document.getElementById("checkbox1"), "Veuillez accepter les conditions générales", "Conditions générales valides")
-
+  const isValidCheckbox1 = displayMessage(!checkbox1.checked, document.getElementById("checkbox1"), "Veuillez accepter les conditions générales")
+  
   if (isValidFirstName && isValidLastName && isValidEmail && isValidBirthDate && isValidQuantity && isValidLocation && isValidCheckbox1) { isValid = true }
   return isValid
 }
 
+// submit form + success message function
 const validate = (e) => {
   e.preventDefault()
   const isValid = validateForm()
@@ -97,6 +96,7 @@ const validate = (e) => {
   } return console.log("Form non valide")
 }
 
+// onClick submit button validate form
 submitButton.addEventListener("click", (e) => validate(e))
 
 
