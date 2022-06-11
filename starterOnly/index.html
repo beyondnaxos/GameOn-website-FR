@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <title>Reservation</title>
@@ -14,7 +14,7 @@
   <body>
     <div class="topnav" id="myTopnav">
       <div class="header-logo">
-      <img alt="logo" src="Logo.png" width="auto" height="auto" />
+      <img alt="logo" src="Logo.png" width="266" height="51" />
     </div>
     <div class="main-navbar">
       
@@ -24,11 +24,11 @@
       <a href="#"><span>Contact</span></a>
       <a href="#"><span>Évènements passés</span></a>
       <a href="javascript:void(0);" class="icon" onclick="editNav()">
-        <i class="fa fa-bars"></i>
+        <i class="fa fa-bars"></i> 
       </a>
     </div>
     </div>
-  </div>
+  
     <main>
       <div class="hero-section">
         <div class="hero-content">
@@ -72,7 +72,6 @@
                   minlength="2"
                   required
                   /><br>
-                  <span id="error0" class="handle_error"></span>
                 </div>
                 <div
                 class="formData">
@@ -85,7 +84,6 @@
                 minlength="2"
                 required
                 /><br>
-                <span id="error1" class="handle_error"></span>
               </div>
               <div
               class="formData">
@@ -97,7 +95,6 @@
                   name="email"
                   required
                   /><br>
-                  <span id="error2" class="handle_error"></span>
                 </div>
                 <div
                 class="formData">
@@ -109,17 +106,15 @@
                 name="birthdate"
                 required
                 /><br>
-                <span id="error3" class="handle_error"></span>
               </div>
               <div
                 class="formData">
                 <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                <input required type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" required>
-                <span id="error4" class="handle_error"></span>
+                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" required>
               </div>
-              <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
                 class="formData">
+              <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
                 <input
                 class="checkbox-input"
                 type="radio"
@@ -186,9 +181,8 @@
                 />
                 <label class="checkbox-label" for="location6">
                   <span class="checkbox-icon"></span>
-                  Portland</label
-                ></br>
-                <span id="error5" class="handle_error"></span>
+                  Portland</label>
+              <br>
               </div>
 
               <div
@@ -199,7 +193,7 @@
                   id="checkbox1"
                   checked
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label class="checkbox2-label" for="checkbox1" >
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
@@ -210,13 +204,20 @@
                   Je souhaite être prévenu des prochains évènements.
                 </label>
                 <br>
-                <span id="error6" class="handle_error"></span>
+              </div>
+              <div class="success">
+                <p>Merci pour votre inscription</p>
               </div>
               <input
-                class="btn-submit"
-                type="submit"
-                class="button"
+                class="button btn-submit sendForm"
+                type="submit"              
                 value="C'est parti"
+              />
+              <input
+                class="button btn-submit closeForm"
+                type="submit"
+                name="closeModal"
+                value="Fermer"
               />
             </form>
            
