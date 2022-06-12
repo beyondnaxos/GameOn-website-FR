@@ -71,14 +71,14 @@ const validateForm = () => {
   const quantity = document.getElementById("quantity").value
   const locationRadio = document.querySelectorAll('input[name="location"]')
   const checkbox1 = document.getElementById("checkbox1");
-  const isValidFirstName = displayMessage(firstname.trim().length < 2, document.getElementById("first"), "Le prénom doit contenir au moins 2 caractères" )
+  const isValidFirstName = displayMessage(firstname.trim().length < 2, document.getElementById("first"), "Le prénom doit contenir au moins 2 caractères")
   const isValidLastName = displayMessage(lastname.trim().length < 2, document.getElementById("last"), "Le nom doit contenir au moins 2 caractères")
   const isValidEmail = displayMessage(!validateEmail(email), document.getElementById("email"), "Veuillez entrer une adresse email valide")
   const isValidBirthDate = displayMessage(!document.getElementById("birthdate").value, document.getElementById("birthdate"), "Veuillez entrer une date de naissance valide")
-  const isValidQuantity = displayMessage(quantity < 1, document.getElementById("quantity"), "Veuillez entrer un nombre supérieur à 0", "Nombre valide")
-  const isValidLocation = displayMessage(!isChecked(locationRadio), document.querySelector("input[name='location']"), "Veuillez choisir un lieu", "Lieu valide")
+  const isValidQuantity = displayMessage(quantity < 1, document.getElementById("quantity"), "Veuillez entrer un nombre supérieur à 0")
+  const isValidLocation = displayMessage(!isChecked(locationRadio), document.querySelector("input[name='location']"), "Veuillez choisir un lieu")
   const isValidCheckbox1 = displayMessage(!checkbox1.checked, document.getElementById("checkbox1"), "Veuillez accepter les conditions générales")
-  
+
   if (isValidFirstName && isValidLastName && isValidEmail && isValidBirthDate && isValidQuantity && isValidLocation && isValidCheckbox1) { isValid = true }
   return isValid
 }
