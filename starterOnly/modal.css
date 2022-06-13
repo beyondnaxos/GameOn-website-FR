@@ -194,7 +194,9 @@ input {
   display: none;
   height: 600px;
   font-size: 25px;
+  justify-content: center;
   align-items: center;
+  
 }
 
 .sendForm{
